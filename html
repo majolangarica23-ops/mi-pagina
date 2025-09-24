@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Weather Langarica</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Baloo 2', cursive;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff7ab6, #ffd23f, #00d2ff, #6bff8a);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      padding: 20px;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h4 {
+      text-align:center;
+      font-size: 28px;
+      margin-bottom: 28px;
+      color: white;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .card-clima {
+      background: rgba(255,255,255,0.85);
+      border-radius: 18px;
+      padding: 20px;
+      text-align:center;
+      cursor:pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+
+    .card-clima:hover {
+      transform: translateY(-6px);
+    }
+
+    .card-clima.active {
+      transform: scale(1.08);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.6);
+      border: 3px solid white;
+    }
+
+    .subtitulo {
+      font-size: 20px;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .valor {
+      font-size: 44px;
+      font-weight: 800;
+      color: #111;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row justify-content-around">
+      <div class="col-12 slider">
+        <h4>Weather Station</h4>
+      </div>
+    </div>
+
+    <div class="row justify-content-around">
+      <div class="col-12 col-md-4">
+        <div class="card-clima" onclick="selectCard(this)">
+          <h3 class="subtitulo">Temperatura</h3>
+          <h3 id="TemperaturaId" class="valor">-- °C</h3>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card-clima" onclick="selectCard(this)">
+          <h3 class="subtitulo">Presión</h3>
+          <h3 id="PresionId" class="valor">-- mmHg</h3>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card-clima" onclick="selectCard(this)">
+          <h3 class="subtitulo">Humedad</h3>
+          <h3 id="HumedadId" class="valor">-- %</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Firebase script propio -->
+  <script src="js/HiFirebase.js"></script>
+
+  <script>
+    function selectCard(card) {
+      document.querySelectorAll('.card-clima').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    }
+  </script>
+</body>
+</html>
